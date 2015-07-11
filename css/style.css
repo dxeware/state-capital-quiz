@@ -1,0 +1,93 @@
+/* Temporary outline of everything */
+/*
+* {
+  outline: red 1px solid;
+}
+*/
+
+body {
+  background-color: blue;
+  font-family: 'Papyrus', Verdana, sans-serif;
+}
+
+.main {
+  background-color: white;
+  background-size: cover;
+  margin-top: 2em;
+  height: 35em;
+  //position: relative;
+  z-index: 1;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0.5em;
+  font-size: 3em;
+  color: white;
+}
+
+.instructions > h3,
+.finale > h3 {
+  font-size: 24px;
+  padding: 1em 0;
+  text-align: center;
+}
+
+.usa-map {
+  width: 500px;
+  height: 320px;
+  background-repeat: no-repeat;
+  margin: auto;
+  margin-top: 2em;
+}
+
+.usa-map {
+  background-image: url('../images/USA.gif');
+}
+
+.state-present {
+  width: 800px;
+  height: 250px;
+  padding-top: 5em;
+  background-repeat: no-repeat;
+  float: left;
+  margin-top: 5em;
+  margin-left: 12em;
+}
+
+.state-one ul {
+  float: right;
+  position: fixed;
+  font-size: 24px;
+  margin-left: 14em;
+}
+
+button#begin, button#try-again {
+  display: block;
+  font-size: 24px;
+  font-family: 'Papyrus';
+  margin: 0 auto;
+  margin-top: 1em;
+  width: 5em;
+  height: 2em;
+  padding: 0;
+  background-color: blue;
+  border: 2px solid black;
+  color:white;
+  text-decoration:none;
+}
+
+button#submit {
+  display: inline-block;
+  font-size: 24px;
+  font-family: 'Papyrus';
+  margin: 8em auto;
+  margin-left: 15em;
+  width: 5em;
+  height: 2em;
+  padding: 0;
+  background-color: blue;
+  border: 2px solid black;
+  color:white;
+  text-decoration:none;
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>State Capital Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <h1>State Capital Quiz</h1>
+  <div class="main">
+    <div class="instructions">
+      <h3>Test your state capital knowledge. Click on "Begin" to start.</h3>
+      <div class="usa-map"></div>
+      <button id="begin">Begin</button>
+    </div>
+    <div class="states">
+      <div class="state-one state-present">
+        <ul style="list-style-type: none">
+          <lh>What is the capital of <span></span>?</lh>
+          <!--
+          <li><input id="option" type="radio" name="city" value="0">Montgomery</li>
+          <li><input id="option" type="radio" name="city" value="1">Auburn</li>
+          <li><input id="option" type="radio" name="city" value="2">Birmingham</li>
+        -->
+        </ul>
+        <button id="submit">Submit</button>
+      </div>
+      <div class="state-two state-present"></div>
+      <div class="state-three state-present"></div>
+      <div class="state-four state-present"></div>
+      <div class="state-five state-present"></div>
+    </div>
+    <div class="finale">
+      <h3>You have finished the quiz.
+      <br>
+      You answered 1 question(s) correctly!</h3>
+      <div class="usa-map"></div>
+      <button id="try-again">Try Again!</button>
+    </div>
+  </div>
+</body>
+
+</html>
