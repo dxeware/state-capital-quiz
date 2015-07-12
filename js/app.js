@@ -7,8 +7,9 @@ $(document).ready(function() {
       }
   };
 
+  // Variables for tracking
   var numQuesAnswered = 0;
-  var numberQuestions = 5;
+  var maxQuestions = 5;
   var numberQuestionsCorrect = 0;
 
   // Create state object "class"
@@ -22,11 +23,6 @@ $(document).ready(function() {
 
   // Method to randomly sort order of question choices
   State.prototype.shuffleChoices = function () {
-
-    //while(this.choices.length !== 0) {
-    //  newChoices.push(randomArrayItem(this.choices));
-    //}
-    //this.choices = newChoices;
 
     this.choices.shuffle();
 
@@ -54,12 +50,12 @@ $(document).ready(function() {
 
   // Show state question when 'Begin' clicked
   $('button#begin').click(function() {
-    //numQuesAnswered = displayQuestions(numQuesAnswered);
     states.shuffle();
     displayQuestions();
   });
 
-  // Show finale when 'Submit' clicked
+  // Show result of choice submitted, and wait
+  // Then  either another question displayed or finale
   $('button#submit').click(function() {
     var correct = 'incorrect';
     var delay=1000; //1 seconds
@@ -69,22 +65,21 @@ $(document).ready(function() {
       alert("Please choose an answer!");
     } else {
       var text = $.trim(input.closest('li').text());
-      //if (input) {
-        //debug("radio text = " + text);
-        if (text === states[numQuesAnswered-1].capital) {
-          correct = 'correct';
-          numberQuestionsCorrect++;
-        }
 
-        $('#result').text(correct);
-        $('#result').show();
-        setTimeout(function(){
-          displayQuestions();
-        }, delay);
+      if (text === states[numQuesAnswered-1].capital) {
+        correct = 'correct';
+        numberQuestionsCorrect++;
       }
+
+      $('#result').text(correct);
+      $('#result').show();
+      setTimeout(function(){
+        displayQuestions();
+      }, delay);
+    }
   });
 
-  // Show state question when 'Try Again' clicked
+  // Show state questions again when 'Try Again' clicked
   $('button#try-again').click(function() {
     //numQuesAnswered = displayQuestions(numQuesAnswered);
     states.shuffle();
@@ -105,28 +100,11 @@ $(document).ready(function() {
     return this;
   }
 
-  // get random array item -- item removed from array
-  /* function randomArrayItem(arr) {
-
-    var index = Math.floor((Math.random() * arr.length));
-
-    var removed = arr.splice(index, 1);
-
-    debug("Removed state " + removed[0].name);
-    return removed[0];
-
-  } */
-
-  /* function resetStates() {
-    states = [alabama, texas, louisiana, idaho, oregon, newyork, pennsylvania, hawaii, nebraska, florida];
-  }
-  */
-
   function setupState(state) {
     $('.state-one').css('background-image', "url('images/" + state.image + "')");
     $('ul lh span').text(state.name);
 
-    //randomizeArray(state.choices);
+    // Shuffle choices and then append to UL
     state.shuffleChoices();
     $('li').remove();
     for (var i = 0; i < state.choices.length; i++) {
@@ -134,7 +112,6 @@ $(document).ready(function() {
     }
   }
 
-  //function displayQuestions(numQuesAnswered) {
   function displayQuestions() {
     debug("Displaying questions!");
 
@@ -142,20 +119,18 @@ $(document).ready(function() {
     $('.finale').hide();
     $('#result').hide();
 
-    if (numQuesAnswered === numberQuestions) {
+    // If reached max questions, show finale
+    if (numQuesAnswered === maxQuestions) {
       $('.state-present').hide();
       $('.finale h3 span').text(numberQuestionsCorrect);
       $('.finale').show();
       //resetStates();
       numQuesAnswered = 0;
-    } else {
+    } else { // Show another question
       setupState(states[numQuesAnswered]);
       $('.state-one').show();
       numQuesAnswered++;
     }
-
-    //return numQuesAnswered;
-
 
   }
 

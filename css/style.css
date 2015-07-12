@@ -96,12 +96,10 @@ div#result {
   font-size: 24px;
   font-family: 'Papyrus';
   margin: -2em 0 auto 4em;
-  //margin-right: 1em;
   width: 5em;
   height: 2em;
   padding: 0;
   background-color: none;
-  //border: 2px solid black;
   color:red;
   text-decoration:none;
 }
