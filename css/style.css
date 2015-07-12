@@ -46,7 +46,7 @@ h1 {
 }
 
 .state-present {
-  width: 800px;
+  width: 1200px;
   height: 250px;
   padding-top: 5em;
   background-repeat: no-repeat;
@@ -58,7 +58,7 @@ h1 {
 .state-one ul {
   display: inline-block;
   font-size: 24px;
-  margin-left: 14em;
+  margin-left: 18em;
 }
 
 button#begin, button#try-again {
@@ -89,4 +89,26 @@ button#submit {
   border: 2px solid black;
   color:white;
   text-decoration:none;
+}
+
+div#result {
+  display: inline-block;
+  font-size: 24px;
+  font-family: 'Papyrus';
+  margin: -2em 0 auto 4em;
+  //margin-right: 1em;
+  width: 5em;
+  height: 2em;
+  padding: 0;
+  background-color: none;
+  //border: 2px solid black;
+  color:red;
+  text-decoration:none;
+}
+
+@media only screen and (max-width: 1000px) {
+    .state-present, .main {
+        //width: 500px;
+        margin-left: 1em;
+    }
 }

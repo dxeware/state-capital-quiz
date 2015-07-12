@@ -61,10 +61,9 @@ $(document).ready(function() {
 
   // Show finale when 'Submit' clicked
   $('button#submit').click(function() {
-    //numQuesAnswered = displayQuestions(numQuesAnswered);
-    //var answer = $('input[name=city]:checked');
-    //var radio = $("input[type='radio']:checked");
-    //if ($('input[name='+radioName+']:checked').length == '0'){
+    var correct = 'incorrect';
+    var delay=1000; //1 seconds
+
     var input = $('input[name="city"]:checked');
     if (input.length === 0) {
       alert("Please choose an answer!");
@@ -73,12 +72,16 @@ $(document).ready(function() {
       //if (input) {
         //debug("radio text = " + text);
         if (text === states[numQuesAnswered-1].capital) {
-            numberQuestionsCorrect++;
-            displayQuestions();
-        } else {
-            displayQuestions();
+          correct = 'correct';
+          numberQuestionsCorrect++;
         }
-    }
+
+        $('#result').text(correct);
+        $('#result').show();
+        setTimeout(function(){
+          displayQuestions();
+        }, delay);
+      }
   });
 
   // Show state question when 'Try Again' clicked
@@ -137,6 +140,7 @@ $(document).ready(function() {
 
     $('.instructions').hide();
     $('.finale').hide();
+    $('#result').hide();
 
     if (numQuesAnswered === numberQuestions) {
       $('.state-present').hide();
