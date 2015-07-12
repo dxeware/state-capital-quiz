@@ -9,6 +9,7 @@ $(document).ready(function() {
 
   var numQuesAnswered = 0;
   var numberQuestions = 5;
+  var numberQuestionsCorrect = 0;
 
   // Create state object "class"
   function State(name, capital, choices, image) {
@@ -21,12 +22,14 @@ $(document).ready(function() {
 
   // Method to randomly sort order of question choices
   State.prototype.shuffleChoices = function () {
-    var newChoices = [];
 
-    while(this.choices.length !== 0) {
-      newChoices.push(randomArrayItem(this.choices));
-    }
-    this.choices = newChoices;
+    //while(this.choices.length !== 0) {
+    //  newChoices.push(randomArrayItem(this.choices));
+    //}
+    //this.choices = newChoices;
+
+    this.choices.shuffle();
+
   };
 
   // Create individual state objects
@@ -52,23 +55,55 @@ $(document).ready(function() {
   // Show state question when 'Begin' clicked
   $('button#begin').click(function() {
     //numQuesAnswered = displayQuestions(numQuesAnswered);
+    states.shuffle();
     displayQuestions();
   });
 
   // Show finale when 'Submit' clicked
   $('button#submit').click(function() {
     //numQuesAnswered = displayQuestions(numQuesAnswered);
-    displayQuestions();
+    //var answer = $('input[name=city]:checked');
+    //var radio = $("input[type='radio']:checked");
+    //if ($('input[name='+radioName+']:checked').length == '0'){
+    var input = $('input[name="city"]:checked');
+    if (input.length === 0) {
+      alert("Please choose an answer!");
+    } else {
+      var text = $.trim(input.closest('li').text());
+      //if (input) {
+        //debug("radio text = " + text);
+        if (text === states[numQuesAnswered-1].capital) {
+            numberQuestionsCorrect++;
+            displayQuestions();
+        } else {
+            displayQuestions();
+        }
+    }
   });
 
   // Show state question when 'Try Again' clicked
   $('button#try-again').click(function() {
     //numQuesAnswered = displayQuestions(numQuesAnswered);
+    states.shuffle();
+    numberQuestionsCorrect = 0;
     displayQuestions();
   });
 
+  // New shuffle for arrays -- randomly shuffle array elements
+  Array.prototype.shuffle = function() {
+    var i = this.length, j, temp;
+    if ( i == 0 ) return this;
+    while ( --i ) {
+       j = Math.floor( Math.random() * ( i + 1 ) );
+       temp = this[i];
+       this[i] = this[j];
+       this[j] = temp;
+    }
+    return this;
+  }
+
   // get random array item -- item removed from array
-  function randomArrayItem(arr) {
+  /* function randomArrayItem(arr) {
 
     var index = Math.floor((Math.random() * arr.length));
 
@@ -77,11 +112,12 @@ $(document).ready(function() {
     debug("Removed state " + removed[0].name);
     return removed[0];
 
-  }
+  } */
 
-  function resetStates() {
+  /* function resetStates() {
     states = [alabama, texas, louisiana, idaho, oregon, newyork, pennsylvania, hawaii, nebraska, florida];
   }
+  */
 
   function setupState(state) {
     $('.state-one').css('background-image', "url('images/" + state.image + "')");
@@ -104,11 +140,12 @@ $(document).ready(function() {
 
     if (numQuesAnswered === numberQuestions) {
       $('.state-present').hide();
+      $('.finale h3 span').text(numberQuestionsCorrect);
       $('.finale').show();
-      resetStates();
+      //resetStates();
       numQuesAnswered = 0;
     } else {
-      setupState(randomArrayItem(states));
+      setupState(states[numQuesAnswered]);
       $('.state-one').show();
       numQuesAnswered++;
     }
