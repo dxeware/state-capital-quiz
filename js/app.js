@@ -108,7 +108,7 @@ $(document).ready(function() {
     state.shuffleChoices();
     $('li').remove();
     for (var i = 0; i < state.choices.length; i++) {
-      $('ul').append($('<li><input id="option" type="radio" name="city" value="' + i + '"> ' + state.choices[i] + '</li>'));
+      $('ul').append($('<li><label><input id="option" type="radio" name="city" value="' + i + '"> ' + state.choices[i] + '</label></li>'));
     }
   }
 
